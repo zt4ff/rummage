@@ -1,0 +1,4 @@
+frontend/
+.git/
+.vscode/
+*.md

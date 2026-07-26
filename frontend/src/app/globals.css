@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   DESIGN TOKENS — "The Field Notes"
+   A warm, editorial system inspired by 37signals' craft.
+   ============================================================ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+
+  /* Token: Ink — warm near-black for body text */
+  --color-ink: #1C1917;
+  /* Token: Paper — warm off-white background */
+  --color-paper: #FAF7F2;
+  /* Token: Fern — deep sage for active/success */
+  --color-fern: #4A7C59;
+  /* Token: Ochre — warm gold for highlights */
+  --color-ochre: #C4922A;
+  /* Token: Stone — warm gray for secondary */
+  --color-stone: #78716C;
+  /* Token: Berry — deep rose for errors */
+  --color-berry: #8B3A62;
+
+  /* Gradient orb stops */
+  --color-gradient-mint: #a7e5d3;
+  --color-gradient-peach: #f4c5a8;
+  --color-gradient-lavender: #c8b8e0;
+  --color-gradient-sky: #a8c8e8;
+  --color-gradient-rose: #e8b8c4;
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ============================================================
+   LIGHT THEME — the default, always-on
+   ============================================================ */
+
+:root {
+  --background: #FAF7F2;
+  --foreground: #1C1917;
+  --card: #FFFFFF;
+  --card-foreground: #1C1917;
+  --popover: #FFFFFF;
+  --popover-foreground: #1C1917;
+
+  /* Primary: Fern green — the "alive" color */
+  --primary: #4A7C59;
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary: warm off-white tint */
+  --secondary: #F0ECE5;
+  --secondary-foreground: #1C1917;
+
+  /* Muted: stone gray wash */
+  --muted: #EDEAE4;
+  --muted-foreground: #78716C;
+
+  /* Accent: ochre gold — highlight warmth */
+  --accent: #C4922A;
+  --accent-foreground: #1C1917;
+
+  /* Destructive: berry rose */
+  --destructive: #8B3A62;
+  --destructive-foreground: #FFFFFF;
+
+  /* Borders and inputs: warm stone */
+  --border: #D6D0C8;
+  --input: #D6D0C8;
+  --ring: #4A7C59;
+
+  --radius: 0.5rem;
+}
+
+/* ============================================================
+   FOCUS — visible keyboard focus states
+   ============================================================ */
+
+*:focus-visible {
+  outline: 2px solid #4A7C59;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   AGENT THREADS — signature animated element
+   Lines that flow from agent cards and converge into the merge.
+   ============================================================ */
+
+@keyframes thread-flow {
+  0% {
+    stroke-dashoffset: 200;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes thread-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes merge-glow {
+  0% { box-shadow: 0 0 0 0 rgba(74, 124, 89, 0); }
+  50% { box-shadow: 0 0 20px 4px rgba(74, 124, 89, 0.15); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 124, 89, 0); }
+}
+
+@keyframes orb-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes orb-drift-alt {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 20px) scale(0.95); }
+  66% { transform: translate(20px, -15px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.agent-thread {
+  stroke-dasharray: 200;
+  animation: thread-flow 2s ease-out forwards;
+}
+
+.agent-thread-pulse {
+  animation: thread-pulse 2s ease-in-out infinite;
+}
+
+.merge-glow {
+  animation: merge-glow 3s ease-in-out infinite;
+}
+
+/* ============================================================
+   GRADIENT ORBS — atmospheric background decoration
+   ============================================================ */
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.orb-mint {
+  background: radial-gradient(circle, #a7e5d3 0%, transparent 70%);
+  animation: orb-drift 20s ease-in-out infinite;
+}
+
+.orb-peach {
+  background: radial-gradient(circle, #f4c5a8 0%, transparent 70%);
+  animation: orb-drift-alt 25s ease-in-out infinite;
+}
+
+.orb-lavender {
+  background: radial-gradient(circle, #c8b8e0 0%, transparent 70%);
+  animation: orb-drift 22s ease-in-out infinite;
+}
+
+.orb-sky {
+  background: radial-gradient(circle, #a8c8e8 0%, transparent 70%);
+  animation: orb-drift-alt 18s ease-in-out infinite;
+}
+
+.orb-rose {
+  background: radial-gradient(circle, #e8b8c4 0%, transparent 70%);
+  animation: orb-drift 23s ease-in-out infinite;
+}
+
+/* ============================================================
+   RESULT CARDS — formatted research findings
+   ============================================================ */
+
+.result-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.result-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   BASE LAYER
+   ============================================================ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
