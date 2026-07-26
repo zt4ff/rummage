@@ -47,7 +47,7 @@ The dashboard is now running at `http://localhost:3000`.
 | Variable | Required | Default | Description |
 |---|---|---|---|
 | `GROQ_API_KEY` | Yes | — | API key for LLM inference ([console.groq.com](https://console.groq.com)) |
-| `GLM_MODEL` | No | `llama-3.3-70b-versatile` | Model identifier for Groq |
+| `MODEL` | No | `llama-3.3-70b-versatile` | Model identifier for Groq |
 | `TAVILY_API_KEY` | No | — | API key for Tavily search. Without it, search falls back to DuckDuckGo, SearXNG, and Google ([app.tavily.com](https://app.tavily.com)) |
 | `PORT` | No | `3001` | Backend server port |
 | `DATABASE_URL` | No | `postgres://localhost:5432/scaff?sslmode=disable` | PostgreSQL connection string (overridden by Docker Compose) |

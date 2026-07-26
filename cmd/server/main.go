@@ -37,9 +37,9 @@ func main() {
 
 	llm := provider.NewOpenRouter(
 		"https://api.groq.com/openai/v1/chat/completions",
-		os.Getenv("GLM_MODEL"),
+		os.Getenv("MODEL"),
 	)
-	log.Printf("[server] LLM provider ready (model=%s, key_set=%v)", os.Getenv("GLM_MODEL"), os.Getenv("GROQ_API_KEY") != "")
+	log.Printf("[server] LLM provider ready (model=%s, key_set=%v)", os.Getenv("MODEL"), os.Getenv("GROQ_API_KEY") != "")
 
 	queue, err := gokue.NewQueue(
 		gokue.WithWorkerCount(8),
